@@ -49,25 +49,29 @@ volta.
 **Distribuzione consigliata:** basta condividere questi 5 file insieme
 (in una cartella zip, chiavetta USB, o link di download):
 `clientmail_outlook_v20.ps1`, `favicon.ico`, `copezzot_logo.jpeg`,
-`changelog.txt`, `esegui.cmd`. L'utente li estrae ovunque e lancia una
-volta lo script: da lì in poi l'app vive in `%USERPROFILE%\MailClient\`
-con lo shortcut pronto sul Desktop.
+`changelog.txt`, `esegui.cmd`. L'utente li estrae in una cartella
+qualsiasi (es. `Downloads\CopezzotMail\`) e fa doppio click su
+**`esegui.cmd`** — è l'unico punto di ingresso pensato per il primo
+avvio: usa un percorso relativo (`%~dp0`) che si risolve sempre alla
+cartella in cui si trova, quindi funziona identico sia dalla cartella di
+download sia, in seguito, da `%USERPROFILE%\MailClient\` una volta
+installato. Da lì in poi l'app vive in `%USERPROFILE%\MailClient\` con
+lo shortcut pronto sul Desktop.
 
 ## Avvio
 
-Copia l'intero contenuto di questa cartella in `%USERPROFILE%\MailClient\`,
-poi:
+**Primo avvio (da qualsiasi cartella, es. Downloads):** doppio click su
+`esegui.cmd`. Questo triggera il self-installer descritto sopra.
 
-- Doppio click su `Copezzot.lnk` (consigliato — nessun terminale visibile,
-  icona personalizzata), oppure
-- Doppio click su `esegui.cmd`, oppure
-- Da terminale:
-  ```powershell
-  powershell -ExecutionPolicy Bypass -File "%USERPROFILE%\MailClient\clientmail_outlook_v20.ps1"
-  ```
+**Avvii successivi:** usa lo shortcut creato sul Desktop, oppure
+`esegui.cmd` dentro `%USERPROFILE%\MailClient\`, oppure da terminale:
+```powershell
+powershell -ExecutionPolicy Bypass -File "%USERPROFILE%\MailClient\clientmail_outlook_v20.ps1"
+```
 
-Il file `.lnk` incluso è già configurato con i percorsi corretti per
-questo setup — se sposti il progetto altrove, ricrea lo shortcut.
+Il file `Copezzot.lnk` incluso nel repo è uno shortcut di esempio già
+configurato per un'installazione esistente — il self-installer ne crea
+uno equivalente automaticamente al primo avvio se manca.
 
 ## Dati generati a runtime (non versionati)
 
