@@ -1,0 +1,1 @@
+powershell -ExecutionPolicy Bypass -file "%USERPROFILE%\MailClient\clientmail_outlook_v20.ps1"

@@ -934,7 +934,7 @@ $form.BackColor     = Parse-Color $script:appSettings.FormBgColor
 $form.Font          = New-Object System.Drawing.Font("Segoe UI", 9)
 
 # Icona da file .ico accanto allo script
-$iconPath = Join-Path (Split-Path -Parent $MyInvocation.MyCommand.Path) "CopezzotMail.ico"
+$iconPath = Join-Path (Split-Path -Parent $MyInvocation.MyCommand.Path) "favicon.ico"
 if (Test-Path $iconPath) { $form.Icon = New-Object System.Drawing.Icon($iconPath) }
 
 # Logo Copezzot in base64 (incorporato nello script)
