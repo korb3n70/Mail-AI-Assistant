@@ -21,7 +21,6 @@ dipendenza esterna oltre Outlook desktop.
 | `copezzot_logo.jpeg` | Logo mostrato nell'header dell'app |
 | `changelog.txt` | Storico versioni, letto e mostrato in-app |
 | `esegui.cmd` | Batch di lancio (evita problemi di ExecutionPolicy) |
-| `Copezzot.lnk` | Shortcut pronto: punta a `esegui.cmd`, icona `favicon.ico` |
 
 **Tutto il progetto gira da `%USERPROFILE%\MailClient\`.** Lo script
 trova la propria cartella dinamicamente (`$MyInvocation.MyCommand.Path`),
@@ -68,10 +67,6 @@ lo shortcut pronto sul Desktop.
 ```powershell
 powershell -ExecutionPolicy Bypass -File "%USERPROFILE%\MailClient\clientmail_outlook_v20.ps1"
 ```
-
-Il file `Copezzot.lnk` incluso nel repo è uno shortcut di esempio già
-configurato per un'installazione esistente — il self-installer ne crea
-uno equivalente automaticamente al primo avvio se manca.
 
 ## Dati generati a runtime (non versionati)
 

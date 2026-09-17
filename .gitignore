@@ -16,3 +16,7 @@ img_cache/
 *.ps1~
 *.bak
 .vscode/
+
+# Shortcut Windows: generato dal self-installer, contiene percorsi
+# e nome della macchina locale
+*.lnk
