@@ -16,22 +16,34 @@ dipendenza esterna oltre Outlook desktop.
 
 | File | Descrizione |
 |---|---|
-| `CopezzotMail.ps1` | Script principale — tutta l'applicazione |
-| `CopezzotMail.ico` | Icona per lo shortcut Windows |
+| `clientmail_outlook_v20.ps1` | Script principale — tutta l'applicazione |
+| `favicon.ico` | Icona per lo shortcut Windows |
 | `copezzot_logo.jpeg` | Logo mostrato nell'header dell'app |
 | `changelog.txt` | Storico versioni, letto e mostrato in-app |
+| `esegui.cmd` | Batch di lancio (evita problemi di ExecutionPolicy) |
+| `Copezzot.lnk` | Shortcut pronto: punta a `esegui.cmd`, icona `favicon.ico` |
 
-**Importante:** i tre file `.ico`, `.jpeg` e `changelog.txt` devono restare
-nella stessa cartella di `CopezzotMail.ps1` — lo script li cerca lì.
+**Tutto il progetto gira da `%USERPROFILE%\MailClient\`.** Lo script
+trova la propria cartella dinamicamente (`$MyInvocation.MyCommand.Path`),
+quindi funziona ovunque venga copiato — ma `favicon.ico`,
+`copezzot_logo.jpeg` e `changelog.txt` devono restare **nella stessa
+cartella** dello script `.ps1`, qualunque essa sia.
 
 ## Avvio
 
-```powershell
-powershell -ExecutionPolicy Bypass -File "CopezzotMail.ps1"
-```
+Copia l'intero contenuto di questa cartella in `%USERPROFILE%\MailClient\`,
+poi:
 
-Oppure crea uno shortcut Windows che punta a questo comando, con
-`CopezzotMail.ico` come icona.
+- Doppio click su `Copezzot.lnk` (consigliato — nessun terminale visibile,
+  icona personalizzata), oppure
+- Doppio click su `esegui.cmd`, oppure
+- Da terminale:
+  ```powershell
+  powershell -ExecutionPolicy Bypass -File "%USERPROFILE%\MailClient\clientmail_outlook_v20.ps1"
+  ```
+
+Il file `.lnk` incluso è già configurato con i percorsi corretti per
+questo setup — se sposti il progetto altrove, ricrea lo shortcut.
 
 ## Dati generati a runtime (non versionati)
 
