@@ -1,0 +1,72 @@
+==============================================================
+   COPEZZOT MAIL AI ASSISTANT - CHANGELOG VERSIONI
+==============================================================
+
+v20 (2026-09)
+  [+] Toolbar rich-text completa anche nel tab Reply/ReplyAll/Inoltra
+  [+] Bottoni INVIA/Salva Bozza/Chiudi/Genera AI integrati nella toolbar
+  [+] Header applicazione: logo Copezzot + MOTD personalizzabile
+  [+] Splash screen di avvio con progresso reale (email per email)
+  [+] Barra di progresso sul pulsante Aggiorna della Posta in Arrivo
+  [+] Numero massimo email da scaricare configurabile (5-500)
+  [+] Selezione account Outlook multi-account (O365/Gmail/IMAP)
+      senza richiedere o memorizzare credenziali
+  [+] Blocco automatico immagini/CSS remoti nell'anteprima email
+      con pulsante "Scarica immagini" su richiesta
+  [+] Sistema di apprendimento stile personale (tab "Il mio stile")
+      - Confronto bozza AI vs versione modificata dall'utente
+      - Interruttori separati per apprendimento e utilizzo
+      - Modifica manuale e azzeramento profilo
+      - File per utente (style_<email>.json)
+  [+] Campo "Nome per firma" per firmare le email generate dall'AI
+  [+] Conferma prima di scartare una bozza Reply/Forward non inviata
+  [+] Validazione indirizzi email prima dell'invio (errore chiaro)
+  [*] Fix: prompt AI - istruzioni utente hanno priorita' assoluta
+  [*] Fix: AI non copia piu' nomi/firme di altre persone dal thread
+  [*] Fix: stile personale non trasferisce parole letterali tra lingue
+  [*] Fix: invio HTML corretto (BodyFormat=2 + HTMLBody)
+  [*] Fix: cache contatti - salvataggio unico invece che per contatto
+  [*] Fix: nessun flash colori all'avvio, impostazioni caricate al boot
+  [*] Fix: logo posizionato correttamente con margine, mai sgranato
+  [*] Scroll verticale su Impostazioni, Il mio stile, Bozze
+
+v19 (2026-09)
+  [+] Dialog AI con selezione lingua (IT/EN/FR/DE/ES) e tono
+  [+] Modalita' Forward distinta da Reply nel prompt AI
+  [*] Lingua rispettata correttamente (system prompt in inglese)
+  [*] Encoding HTTP: HttpWebRequest UTF-8 senza BOM
+  [*] Fix corpo email vuoto in invio risposta
+  [*] Fix originalEmail closure scope (script:rOrigEmail)
+  [*] Reply: To/CC/Subject popolati correttamente
+  [*] ReplyAll: To include mittente + destinatari originali
+  [*] Email originale nel corpo risposta stile Outlook
+
+v15 (2026-09)
+  [+] Posta in Arrivo: ListView a 4 colonne, ordinamento nativo
+  [+] Email non lette in blu + grassetto
+  [+] Tab Impostazioni: area Changelog Versioni
+
+v14m (2026-08)
+  [*] Fix gestione immagini CID e firma HTML
+  [*] Bozze JSON con aggiornamento live della lista
+  [*] Fix scope closure variabili Reply
+
+v14 (2026-07)
+  [+] Sistema Bozze ibrido: JSON locale + cartella Bozze Outlook
+  [+] Risoluzione Exchange Distinguished Name mittente
+
+v13 (2026-06)
+  [+] Integrazione AI per risposte automatiche
+  [+] Tab Reply dinamico per risposte AI
+
+v12 (2026-05)
+  [+] Salvataggio bozze nella cartella Bozze di Outlook
+  [+] Cifratura credenziali con DPAPI Windows
+
+v11 (2026-04)
+  [+] Lettura email dalla cartella Inbox
+  [+] Anteprima corpo email HTML con WebBrowser
+
+v10 (2026-03)
+  [+] Prima versione funzionante
+  [+] Compose email + invio con allegati tramite Outlook COM

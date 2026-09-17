@@ -1,0 +1,18 @@
+# File generati a runtime dallo script - contengono dati personali
+# (API key cifrata, indirizzi email, bozze, profilo di stile).
+# Questi vengono creati in %USERPROFILE%\MailClient\ e non in questa
+# cartella, ma li escludiamo comunque per sicurezza nel caso lo script
+# venga eseguito da qui durante lo sviluppo.
+creds.xml
+app_settings.json
+contacts_cache.json
+drafts.json
+style_*.json
+reply_temp.html
+preview_temp.html
+img_cache/
+
+# File temporanei PowerShell / editor
+*.ps1~
+*.bak
+.vscode/
