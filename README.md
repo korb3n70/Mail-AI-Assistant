@@ -29,6 +29,30 @@ quindi funziona ovunque venga copiato — ma `favicon.ico`,
 `copezzot_logo.jpeg` e `changelog.txt` devono restare **nella stessa
 cartella** dello script `.ps1`, qualunque essa sia.
 
+## Installazione automatica
+
+Lo script include un **self-installer**: se viene lanciato da una cartella
+diversa da `%USERPROFILE%\MailClient\` (es. Downloads, Desktop, chiavetta
+USB), al primo avvio:
+
+1. Crea `%USERPROFILE%\MailClient\` se non esiste
+2. Copia se stesso e gli asset trovati accanto a sé (`favicon.ico`,
+   `copezzot_logo.jpeg`, `changelog.txt`, `esegui.cmd`) nella cartella
+3. Crea uno shortcut **"Copezzot Mail AI Assistant.lnk" sul Desktop**,
+   solo se non esiste già uno (non sovrascrive uno shortcut esistente)
+4. Si rilancia dalla copia installata e chiude l'istanza originale
+
+Le esecuzioni successive (già dalla cartella corretta) saltano questo
+passaggio e procedono normalmente — nessun rallentamento dopo la prima
+volta.
+
+**Distribuzione consigliata:** basta condividere questi 5 file insieme
+(in una cartella zip, chiavetta USB, o link di download):
+`clientmail_outlook_v20.ps1`, `favicon.ico`, `copezzot_logo.jpeg`,
+`changelog.txt`, `esegui.cmd`. L'utente li estrae ovunque e lancia una
+volta lo script: da lì in poi l'app vive in `%USERPROFILE%\MailClient\`
+con lo shortcut pronto sul Desktop.
+
 ## Avvio
 
 Copia l'intero contenuto di questa cartella in `%USERPROFILE%\MailClient\`,

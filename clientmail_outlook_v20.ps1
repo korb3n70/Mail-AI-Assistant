@@ -4,6 +4,71 @@
 #      chiarimento Admin Key per statistiche utilizzo
 # ============================================================
 
+# ============================================================
+# SELF-INSTALLER
+# Se lo script viene lanciato da una cartella diversa da
+# %USERPROFILE%\MailClient (es. Download, Desktop, chiavetta USB),
+# si copia automaticamente li' insieme agli asset trovati accanto
+# a se stesso, crea uno shortcut sul Desktop se non esiste gia',
+# e si rilancia dalla posizione installata chiudendo l'istanza
+# corrente. Tutte le esecuzioni successive (dalla cartella corretta)
+# saltano questo blocco e procedono normalmente.
+# ============================================================
+try {
+    $InstallDir = "$env:USERPROFILE\MailClient"
+    $ScriptPath = $MyInvocation.MyCommand.Path
+    if ($ScriptPath) {
+        $ScriptDir  = (Split-Path -Parent $ScriptPath).TrimEnd('\')
+        $ScriptName = Split-Path -Leaf $ScriptPath
+
+        if ($ScriptDir -ine $InstallDir.TrimEnd('\')) {
+            if (-not (Test-Path $InstallDir)) {
+                New-Item -ItemType Directory -Force -Path $InstallDir | Out-Null
+            }
+
+            # Copia lo script stesso e gli asset noti se presenti accanto ad esso
+            $filesToCopy = @($ScriptName, "favicon.ico", "copezzot_logo.jpeg", "changelog.txt", "esegui.cmd")
+            foreach ($f in $filesToCopy) {
+                $src = Join-Path $ScriptDir $f
+                $dst = Join-Path $InstallDir $f
+                if (Test-Path $src) {
+                    try { Copy-Item -Path $src -Destination $dst -Force -ErrorAction Stop } catch {}
+                }
+            }
+
+            # Crea shortcut sul Desktop se non esiste gia'
+            try {
+                $desktopPath  = [Environment]::GetFolderPath("Desktop")
+                $shortcutPath = Join-Path $desktopPath "Copezzot Mail AI Assistant.lnk"
+                if (-not (Test-Path $shortcutPath)) {
+                    $wshell   = New-Object -ComObject WScript.Shell
+                    $shortcut = $wshell.CreateShortcut($shortcutPath)
+                    $cmdInInstall = Join-Path $InstallDir "esegui.cmd"
+                    if (Test-Path $cmdInInstall) {
+                        $shortcut.TargetPath = $cmdInInstall
+                    } else {
+                        $shortcut.TargetPath  = "$env:WINDIR\System32\WindowsPowerShell\v1.0\powershell.exe"
+                        $shortcut.Arguments   = "-ExecutionPolicy Bypass -File `"$InstallDir\$ScriptName`""
+                    }
+                    $shortcut.WorkingDirectory = $InstallDir
+                    $iconInInstall = Join-Path $InstallDir "favicon.ico"
+                    if (Test-Path $iconInInstall) { $shortcut.IconLocation = $iconInInstall }
+                    $shortcut.Description = "Copezzot Mail AI Assistant"
+                    $shortcut.Save()
+                }
+            } catch { }
+
+            # Rilancia dalla posizione installata e chiudi questa istanza
+            $installedScript = Join-Path $InstallDir $ScriptName
+            if (Test-Path $installedScript) {
+                Start-Process "$env:WINDIR\System32\WindowsPowerShell\v1.0\powershell.exe" `
+                    -ArgumentList "-ExecutionPolicy Bypass -File `"$installedScript`""
+                exit
+            }
+        }
+    }
+} catch { }
+
 # Caricamento assembly compatibile con PowerShell 5.x e 7+
 $assemblies = @("System.Windows.Forms", "System.Drawing", "System.Security")
 foreach ($asm in $assemblies) {
